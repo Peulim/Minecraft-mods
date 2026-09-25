@@ -1,0 +1,6 @@
+import { addItem, calculateArmorClass, deriveAttacks, setItemQuantity, toggleEquipped } from "../inventoryRules";
+import { createDraft } from "../characterRules";
+import { Item } from "../types";
+const sword: Item = { id: "sword", name: "Longsword", description: "", type: "weapon", source: "PHB", properties: [], damage: "1d8", damageType: "slashing" };
+const armor: Item = { id: "armor", name: "Leather", description: "", type: "armor", source: "PHB", properties: [], armorCategory: "light", armorClass: 11 };
+describe("inventory rules", () => { it("adds, changes and toggles inventory entries", () => { let inventory = addItem([], "sword"); inventory = addItem(inventory, "sword"); expect(inventory[0].quantity).toBe(2); inventory = toggleEquipped(inventory, "sword"); expect(inventory[0].equipped).toBe(true); expect(setItemQuantity(inventory, "sword", 0)).toEqual([]); }); it("calculates armor class and weapon attacks", () => { const character = { ...createDraft(), level: 1, abilities: { str: 16, dex: 14, con: 8, int: 8, wis: 8, cha: 8 }, inventory: [{ itemId: "sword", quantity: 1, equipped: true }, { itemId: "armor", quantity: 1, equipped: true }] }; expect(calculateArmorClass(character, [sword, armor])).toBe(13); expect(deriveAttacks(character, [sword])[0].damage).toContain("+3"); }); });

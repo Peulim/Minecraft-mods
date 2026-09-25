@@ -1,0 +1,4 @@
+jest.mock("@react-native-async-storage/async-storage", () => { let value: string | null = null; return { getItem: jest.fn(async () => value), setItem: jest.fn(async (_key, next) => { value = next; }), removeItem: jest.fn(async () => { value = null; }) }; });
+import { catalogRepository } from "../catalogRepository";
+const catalog = { version: 2 as const, metadata: { schemaVersion: 2 as const, sourceFormat: "seed" as const, counts: {}, presentTypes: [], uninterpreted: [] }, species: [], classes: [], backgrounds: [], feats: [], spells: [], items: [], features: [] };
+describe("catalog persistence", () => { it("saves, loads and clears an imported catalog", async () => { await catalogRepository.save(catalog); expect(await catalogRepository.get()).toEqual(catalog); await catalogRepository.clear(); expect(await catalogRepository.get()).toBeUndefined(); }); });

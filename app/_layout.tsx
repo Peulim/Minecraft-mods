@@ -1,0 +1,5 @@
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { CharacterProvider } from "@/state/CharacterContext";
+import { CatalogProvider } from "@/state/CatalogContext";
+export default function Layout() { return <CatalogProvider><CharacterProvider><StatusBar style="light" /><Stack screenOptions={{ headerStyle: { backgroundColor: "#10131C" }, headerTintColor: "#F4F6FC", headerShadowVisible: false, contentStyle: { backgroundColor: "#10131C" } }}><Stack.Screen name="index" options={{ headerShown: false }} /><Stack.Screen name="settings" options={{ title: "Conteúdo" }} /><Stack.Screen name="sources/index" options={{ title: "Fontes" }} /><Stack.Screen name="sources/[id]" options={{ title: "Detalhes da fonte" }} /><Stack.Screen name="builder/[step]" options={{ title: "Criar personagem" }} /><Stack.Screen name="character/[id]" options={{ title: "Ficha" }} /><Stack.Screen name="catalog/[type]" options={{ title: "Catálogo" }} /><Stack.Screen name="choice/[id]" options={{ title: "Escolha pendente" }} /></Stack></CharacterProvider></CatalogProvider>; }
