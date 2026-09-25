@@ -1,0 +1,4 @@
+import { FiveEToolsImportProvider } from "../FiveEToolsImportProvider";
+import { normalizeFiveEToolsJson } from "../fiveEToolsNormalizer";
+const data = { race: [{ name: "Human", source: "PHB", entries: ["Versatile"] }], class: [{ name: "Fighter", source: "PHB", entries: ["Martial"] }], subclass: [{ name: "Champion", source: "PHB", className: "Fighter", classSource: "PHB", entries: ["Athletic"] }] };
+describe("import provider selection", () => { it("queries normalized selections without exposing raw JSON", async () => { const provider = new FiveEToolsImportProvider(normalizeFiveEToolsJson(data).catalog); const fighter = (await provider.getClasses())[0]; expect((await provider.getSubclasses(fighter.id))[0].name).toBe("Champion"); expect((await provider.getById(fighter.id))?.kind).toBe("class"); }); });

@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "Rune",
+    "slug": "rune-character-builder",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "android": { "package": "com.rune.characterbuilder" },
+    "plugins": ["expo-router"],
+    "experiments": { "typedRoutes": true }
+  }
+}
